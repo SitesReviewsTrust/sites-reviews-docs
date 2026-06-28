@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🔌 Public REST API & widgets
+    url: https://github.com/SitesReviewsTrust/sites-reviews-api/issues
+    about: Bugs, endpoints, or questions about the REST API and embeddable widgets.
+  - name: 🧠 MCP server
+    url: https://github.com/SitesReviewsTrust/sites-reviews-mcp/issues
+    about: Setup, tools, or bugs in the MCP server for AI assistants.
+  - name: 🧩 Browser extension
+    url: https://github.com/SitesReviewsTrust/sites-reviews-extension/issues
+    about: Issues with the Chrome/Firefox extension.
+  - name: 🔒 Report a security vulnerability
+    url: https://github.com/SitesReviewsTrust/sites-reviews-docs/security/advisories/new
+    about: Privately report a security issue (do not open a public issue).
+  - name: 🚩 Wrong rating or review on a company
+    url: https://sites.reviews
+    about: Report inaccurate ratings/reviews on the business page itself at sites.reviews.

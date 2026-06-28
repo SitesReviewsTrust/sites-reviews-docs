@@ -1,0 +1,57 @@
+name: "📝 Documentation issue"
+description: "Report a typo, broken link, inaccuracy, or suggest a docs improvement."
+title: "[docs]: "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for improving the Sites.Reviews docs! This repo is **documentation only**.
+        For bugs in the API, MCP server, or extension, please use their own repos:
+        [sites-reviews-api](https://github.com/SitesReviewsTrust/sites-reviews-api) ·
+        [sites-reviews-mcp](https://github.com/SitesReviewsTrust/sites-reviews-mcp) ·
+        [sites-reviews-extension](https://github.com/SitesReviewsTrust/sites-reviews-extension).
+        Wrong rating/review on a company? Report it on the [sites.reviews](https://sites.reviews) page itself.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of issue is this?
+      options:
+        - Typo or wording
+        - Broken or wrong link
+        - Inaccurate / outdated information
+        - Missing content or suggestion
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Where is it?
+      description: Page and section (e.g. `docs/api-and-tools.md` → "Public REST API"), or a link.
+      placeholder: "docs/faq.md → Is there a public API I can call?"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the issue
+      description: What's wrong, and what would be correct or clearer?
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested wording (optional)
+      description: If you have proposed text, paste it here.
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: This is about the **documentation**, not the API/MCP/extension code or a company's rating.
+          required: true
+        - label: I searched existing issues and didn't find a duplicate.
+          required: true

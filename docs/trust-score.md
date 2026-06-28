@@ -49,7 +49,14 @@ The trust score brings the community signals and the automated checks together i
 
 ## Where the data lives
 
-The signals behind a score are reflected in each business page's structured data (schema.org JSON-LD with `aggregateRating` and `review`) at `https://sites.reviews/businesses/{domain}`. See [ecosystem.md](./ecosystem.md#-public-data--schemaorg-json-ld) for how to read it.
+You can read a business's score and reviews programmatically through the **[public REST API](./api-and-tools.md#-public-rest-api-live)**:
+
+```bash
+curl "https://sites.reviews/api/public/v1/check?domain=1ps.ru"
+# → {"trust_score":9.6,"avg_ratings":4.8,"total_reviews":34, …}
+```
+
+Here `trust_score` is the 0–10 headline score and `avg_ratings` is the 0–5 star average. The same signals are also reflected in each business page's structured data (schema.org JSON-LD with `aggregateRating` and `review`) at `https://sites.reviews/businesses/{domain}` — see [ecosystem.md](./ecosystem.md#-public-data--schemaorg-json-ld).
 
 ---
 

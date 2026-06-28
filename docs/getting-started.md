@@ -33,33 +33,49 @@ Install the **[browser extension](https://sites.reviews/extension)** (Chrome/Fir
 
 ## 🛠️ For developers — using Sites.Reviews data
 
-### Read structured data today (no key needed)
+All developer access is **read-only** and **needs no API key**. Full details in **[api-and-tools.md](./api-and-tools.md)**.
 
-Every business page embeds **schema.org JSON-LD** with `aggregateRating` and `review`. Fetch the page and parse the JSON-LD:
+### Call the public REST API (no key)
 
+Base URL `https://sites.reviews/api/public/v1` — no auth, CORS `*`, 60 req/min/IP.
+
+```bash
+# Trust score + rating for any domain
+curl "https://sites.reviews/api/public/v1/check?domain=1ps.ru"
+# → {"trust_score":9.6,"avg_ratings":4.8,"total_reviews":34, …}
 ```
-GET https://sites.reviews/businesses/{domain}
+
+From the browser (CORS is open):
+
+```js
+const r = await fetch("https://sites.reviews/api/public/v1/check?domain=1ps.ru");
+const { trust_score, avg_ratings, total_reviews } = await r.json();
 ```
 
-Look for `<script type="application/ld+json">` in the HTML and read the `aggregateRating` / `review` fields. This is the simplest machine-readable access available right now.
+Endpoints: `GET /check?domain=` · `GET /business/{domain}` · `GET /reviews/{domain}` · `GET /search?q=`. Full reference: **[sites-reviews-api](https://github.com/SitesReviewsTrust/sites-reviews-api)**.
 
 ### Let an AI assistant look things up — MCP server
 
-Connect the **[sites-reviews-mcp](https://github.com/SitesReviewsTrust/sites-reviews-mcp)** server to Claude (or any MCP-compatible client) so your assistant can fetch trust scores and reviews on demand. See that repo's README for setup.
+Connect the **[sites-reviews-mcp](https://github.com/SitesReviewsTrust/sites-reviews-mcp)** server so Claude (or any MCP-compatible client) can fetch the same data on demand — zero install:
+
+```bash
+claude mcp add sites-reviews -- npx -y sites-reviews-mcp
+```
 
 ### Embed reviews on your own site — widget (beta)
 
 The **[sites-reviews-api](https://github.com/SitesReviewsTrust/sites-reviews-api)** repo provides an embeddable reviews widget (currently in **beta**). Check the repo for current embed instructions.
 
-### What's *not* available (yet)
+### Also available — schema.org JSON-LD
 
-There is **no public JSON REST API** at this time. For programmatic access, use the **MCP server** or the **JSON-LD** approach above, and watch the [api repo](https://github.com/SitesReviewsTrust/sites-reviews-api) for updates.
+Every business page at `https://sites.reviews/businesses/{domain}` embeds **schema.org JSON-LD** (`aggregateRating` + `review`) — handy if you're already parsing the page (SEO tooling, rich snippets). For structured data, prefer the REST API above.
 
 ---
 
 ## Next steps
 
 - Understand the project's surfaces → [ecosystem.md](./ecosystem.md)
+- Build on the data (API + MCP + widget) → [api-and-tools.md](./api-and-tools.md)
 - Understand the rating → [trust-score.md](./trust-score.md)
 - Common questions → [faq.md](./faq.md)
 

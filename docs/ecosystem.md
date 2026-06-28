@@ -36,21 +36,37 @@ A Chrome/Firefox extension that surfaces a site's **trust score on the page you'
 
 ---
 
-## 🧠 MCP server — [sites-reviews-mcp](https://github.com/SitesReviewsTrust/sites-reviews-mcp)
+## 🔌 Public REST API — [sites-reviews-api](https://github.com/SitesReviewsTrust/sites-reviews-api)
 
-A [Model Context Protocol](https://modelcontextprotocol.io) server that lets **AI assistants** (Claude and other MCP-compatible clients) look up trust scores and reviews on demand. Connect it to your assistant and you can ask things like *"Is this shop trustworthy?"* and get Sites.Reviews data in the answer.
+**Live.** A no-auth, read-only JSON API for trust scores, business profiles, and reviews.
 
-This is the recommended path today for programmatic / AI-driven lookups (see the API note below).
+- **Base URL:** `https://sites.reviews/api/public/v1`
+- **No API key**, CORS `*` (call it from browser JS), **60 req/min/IP**, responses cached ~5 min.
+- **Endpoints:** `GET /check?domain=` · `GET /business/{domain}` · `GET /reviews/{domain}` · `GET /search?q=`
+
+```bash
+curl "https://sites.reviews/api/public/v1/check?domain=1ps.ru"
+```
+
+This is the recommended path for programmatic lookups. Full reference lives in the **[sites-reviews-api](https://github.com/SitesReviewsTrust/sites-reviews-api)** repo; an overview with examples is in **[api-and-tools.md](./api-and-tools.md)**.
 
 ---
 
-## 🔌 API & widgets — [sites-reviews-api](https://github.com/SitesReviewsTrust/sites-reviews-api)
+## 🧠 MCP server — [sites-reviews-mcp](https://github.com/SitesReviewsTrust/sites-reviews-mcp)
 
-Programmatic and embeddable access to Sites.Reviews data. Current state, stated honestly:
+A [Model Context Protocol](https://modelcontextprotocol.io) server that gives **AI assistants** (Claude and other MCP-compatible clients) the **same data** as the REST API, on demand. Connect it and you can ask *"Is this shop trustworthy?"* and get Sites.Reviews data in the answer. Zero install:
 
-- **Public structured data** — every business page ships **schema.org JSON-LD** (`aggregateRating` + `review`) you can read from `https://sites.reviews/businesses/{domain}`. This is machine-readable today, no key required.
-- **Embeddable reviews widget** — embed your company's reviews on your own site. **Beta.**
-- **There is no public JSON REST API yet.** If you need programmatic lookups, use the **[MCP server](https://github.com/SitesReviewsTrust/sites-reviews-mcp)** or read the JSON-LD. Watch the [api repo](https://github.com/SitesReviewsTrust/sites-reviews-api) for updates.
+```bash
+claude mcp add sites-reviews -- npx -y sites-reviews-mcp
+```
+
+Use the **REST API** when your code needs the data; use the **MCP server** when a language model does. See [api-and-tools.md](./api-and-tools.md#-mcp-server-for-ai-assistants).
+
+---
+
+## 🧱 Embeddable reviews widget — [sites-reviews-api](https://github.com/SitesReviewsTrust/sites-reviews-api)
+
+Embed your company's reviews on your own site with a copy-paste snippet. **Beta** — see the [api repo](https://github.com/SitesReviewsTrust/sites-reviews-api) for current embed instructions.
 
 ---
 
@@ -61,9 +77,9 @@ Each business page embeds structured data following [schema.org](https://schema.
 - `aggregateRating` — the overall score and review count
 - `review` — individual reviews with ratings and text
 
-This makes business pages readable by search engines, AI assistants, and your own scripts. To consume it, fetch `https://sites.reviews/businesses/{domain}` and parse the `<script type="application/ld+json">` block.
+This makes business pages readable by search engines, AI crawlers, and your own scripts. To consume it, fetch `https://sites.reviews/businesses/{domain}` and parse the `<script type="application/ld+json">` block.
 
-> Exact field availability can vary by business and over time; treat the JSON-LD on each page as the source of truth.
+> For structured programmatic access, prefer the **[public REST API](#-public-rest-api--sites-reviews-api)** — use JSON-LD when you're already parsing the page (SEO tooling, rich snippets). Exact field availability can vary by business and over time; treat the live data as the source of truth.
 
 ---
 
@@ -73,8 +89,8 @@ This makes business pages readable by search engines, AI assistants, and your ow
 |---|---|
 | [sites-reviews-docs](https://github.com/SitesReviewsTrust/sites-reviews-docs) | Documentation hub (cross-linking center) |
 | [sites-reviews-extension](https://github.com/SitesReviewsTrust/sites-reviews-extension) | Browser extension |
+| [sites-reviews-api](https://github.com/SitesReviewsTrust/sites-reviews-api) | Public REST API reference & embeddable widgets |
 | [sites-reviews-mcp](https://github.com/SitesReviewsTrust/sites-reviews-mcp) | MCP server for AI assistants |
-| [sites-reviews-api](https://github.com/SitesReviewsTrust/sites-reviews-api) | API & embeddable widgets (beta) |
 | [All repositories](https://github.com/orgs/SitesReviewsTrust/repositories) | The full SitesReviewsTrust org |
 
 ---

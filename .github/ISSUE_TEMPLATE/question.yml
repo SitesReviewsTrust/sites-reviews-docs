@@ -1,0 +1,48 @@
+name: "❓ Question"
+description: "Ask a question about the Sites.Reviews platform, ecosystem, or how to use the data."
+title: "[question]: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a question? Check the **[FAQ](https://github.com/SitesReviewsTrust/sites-reviews-docs/blob/main/docs/faq.md)**
+        and **[Getting started](https://github.com/SitesReviewsTrust/sites-reviews-docs/blob/main/docs/getting-started.md)** first —
+        your answer may already be there.
+  - type: dropdown
+    id: topic
+    attributes:
+      label: What's your question about?
+      options:
+        - Using the platform (trust scores, reviews, scam-check)
+        - Public REST API
+        - MCP server / AI assistants
+        - Embeddable widget
+        - Browser extension
+        - Adding or managing a business
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: Be as specific as you can. Include URLs, domains, or snippets if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: What have you tried or read?
+      description: Links to docs pages you've already checked, commands you ran, etc. (optional)
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I checked the FAQ and Getting started and didn't find the answer.
+          required: true
+        - label: This question is about docs/ecosystem usage (not a bug in a specific repo's code).
+          required: false
