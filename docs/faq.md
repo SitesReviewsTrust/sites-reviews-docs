@@ -51,7 +51,7 @@ Endpoints: `GET /check?domain=` · `GET /business/{domain}` · `GET /reviews/{do
 Connect the **[MCP server](https://github.com/SitesReviewsTrust/sites-reviews-mcp)** to Claude or another MCP-compatible client — it serves the same data as the REST API as callable tools. Zero install:
 
 ```bash
-claude mcp add sites-reviews -- npx -y sites-reviews-mcp
+claude mcp add sites-reviews -- npx -y @sitesreviews/mcp
 ```
 
 Then ask your assistant about a site's reputation and it answers with Sites.Reviews data.

@@ -57,7 +57,7 @@ This is the recommended path for programmatic lookups. Full reference lives in t
 A [Model Context Protocol](https://modelcontextprotocol.io) server that gives **AI assistants** (Claude and other MCP-compatible clients) the **same data** as the REST API, on demand. Connect it and you can ask *"Is this shop trustworthy?"* and get Sites.Reviews data in the answer. Zero install:
 
 ```bash
-claude mcp add sites-reviews -- npx -y sites-reviews-mcp
+claude mcp add sites-reviews -- npx -y @sitesreviews/mcp
 ```
 
 Use the **REST API** when your code needs the data; use the **MCP server** when a language model does. See [api-and-tools.md](./api-and-tools.md#-mcp-server-for-ai-assistants).

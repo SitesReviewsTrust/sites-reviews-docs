@@ -146,7 +146,7 @@ No clone, no global install, no key — it runs on demand via `npx`:
 **Claude Code / Claude Desktop (one-liner):**
 
 ```bash
-claude mcp add sites-reviews -- npx -y sites-reviews-mcp
+claude mcp add sites-reviews -- npx -y @sitesreviews/mcp
 ```
 
 **Any MCP client (config block):**
@@ -156,7 +156,7 @@ claude mcp add sites-reviews -- npx -y sites-reviews-mcp
   "mcpServers": {
     "sites-reviews": {
       "command": "npx",
-      "args": ["-y", "sites-reviews-mcp"]
+      "args": ["-y", "@sitesreviews/mcp"]
     }
   }
 }

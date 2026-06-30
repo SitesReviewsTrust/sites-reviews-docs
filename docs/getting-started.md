@@ -59,7 +59,7 @@ Endpoints: `GET /check?domain=` · `GET /business/{domain}` · `GET /reviews/{do
 Connect the **[sites-reviews-mcp](https://github.com/SitesReviewsTrust/sites-reviews-mcp)** server so Claude (or any MCP-compatible client) can fetch the same data on demand — zero install:
 
 ```bash
-claude mcp add sites-reviews -- npx -y sites-reviews-mcp
+claude mcp add sites-reviews -- npx -y @sitesreviews/mcp
 ```
 
 ### Embed reviews on your own site — widget (beta)
